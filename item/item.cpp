@@ -2,7 +2,9 @@
 
 Item::Item(string name, unsigned int height, unsigned int width, unsigned int length) 
     : _name(name), _height(height), _width(width), _length(length)
-{}
+{
+    _size = _height * _width * _length;
+}
 
 ostream& operator<<(ostream& os, Item& item) 
 { 
@@ -20,4 +22,9 @@ string Item::getName() {
     }
 
     return result;
+}
+
+unsigned int Item::getSize() 
+{
+    return _size;
 }

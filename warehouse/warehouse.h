@@ -28,4 +28,10 @@ public:
     void printItems();
 
     bool seacrhItem(string name);
+    
+    unsigned int getItemSize(string name);
+    unsigned int getBoxSize(unsigned int id);
+
+    unsigned int getSuitableBox(unsigned int size);
+    unsigned int howNeedBoxes(unsigned int idBox, string nameItem, unsigned int numberItems);
 };

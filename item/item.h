@@ -15,6 +15,8 @@ private:
     unsigned int _width;
     unsigned int _length;
 
+    unsigned int _size;
+
 public:
 
     Item(string name, unsigned int height, unsigned int width, unsigned int length);
@@ -22,4 +24,5 @@ public:
     friend ostream& operator<<(ostream& os, Item& item);
 
     string getName();
+    unsigned int getSize();
 };

@@ -15,13 +15,13 @@ int main() {
     bool is_exit = false;
     unsigned int response;
 
-    Item item1("стул", 20, 25, 35);
-    Item item2("шкаф", 60, 60, 60);
-    Item item3("стол", 40, 40, 40);
+    Item item1("chair", 20, 25, 35);
+    Item item2("wardrobe", 80, 60, 60);
+    Item item3("table", 40, 40, 40);
 
-    Box box1(20, 25, 35);
-    Box box2(60, 60, 60);
-    Box box3(40, 40, 40); 
+    Box box1(60, 60, 60);
+    Box box2(40, 40, 40);
+    Box box3(20, 25, 45); 
 
     Warehouse warehouse;
 
@@ -114,6 +114,21 @@ int main() {
                 break;
             }
 
+            {
+                unsigned int itemSize = warehouse.getItemSize(name);
+                unsigned int idSuitableBox = warehouse.getSuitableBox(itemSize);
+
+                if (idSuitableBox == 0) {
+                    cout << "Подходящей коробки для фасовки товара нету" << endl << endl;
+                    break;
+                }
+
+                cout << "Товар надо разместить в коробке №" << idSuitableBox << endl;
+                cout << "Кол-во необходимых коробок: " << warehouse.howNeedBoxes(idSuitableBox, name, number) << endl << endl;
+
+                break;
+            }
+
             break;
 
         case 0:
@@ -123,7 +138,7 @@ int main() {
 
         default:
         
-            is_exit = true;
+            cout << "Такой пункт в меню отсутсвует" << endl << endl;
             break;
         }
     }

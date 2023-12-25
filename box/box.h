@@ -13,9 +13,13 @@ private:
     unsigned int _width;
     unsigned int _length;
 
+    unsigned int _size;
+
 public:
 
     Box(unsigned int height, unsigned int width, unsigned int length);
 
     friend ostream& operator<<(ostream& os, Box& box);
+
+    unsigned int getSize();
 };

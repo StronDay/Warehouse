@@ -31,9 +31,13 @@ ostream& operator<<(ostream& os, Warehouse& warehouse)
 
     os << endl;
 
+    int id = 1;
+
     for (auto box: warehouse._boxes) {
-        os << endl << "Коробка" << endl << box << endl;
+        os << endl << "Коробка №" <<  id << endl << box << endl;
         os << "----------------------------------------";
+
+        id++;
     }
     os << endl << "--------------------------------------------------" << endl << endl;
 
@@ -57,9 +61,53 @@ bool Warehouse::seacrhItem(string name)
     bool result = false;
 
     for (auto item: _items) {
-        cout << name << endl << item.getName();
         if (item.getName() == name) result = true;
     }
 
     return result;
+}
+
+unsigned int Warehouse::getItemSize(string name) 
+{
+    for (char& c : name) {
+        c = tolower(c);
+    }
+
+    unsigned int result;
+
+    for (auto item: _items) {
+        if (item.getName() == name) result = item.getSize();
+    }
+
+    return result;
+}
+
+unsigned int Warehouse::getBoxSize(unsigned int id) 
+{
+    return _boxes[id].getSize();
+}
+
+unsigned int Warehouse::getSuitableBox(unsigned int size) 
+{
+    unsigned int id = 1;
+
+    unsigned int buffSize = 0;
+    unsigned int minId = 0;
+
+
+    for (auto box: _boxes) {
+        if (box.getSize() >= size && (buffSize == 0 || box.getSize() < buffSize)) {
+            minId = id;
+            buffSize = box.getSize();
+        }
+
+        id++;
+    }
+
+    return minId == 0 ? 0: minId;
+}
+
+unsigned int Warehouse::howNeedBoxes(unsigned int idBox, string nameItem, unsigned int numberItems)
+{
+    return (numberItems * getItemSize(nameItem) + getBoxSize(idBox - 1) - 1) / getBoxSize(idBox - 1);
 }
